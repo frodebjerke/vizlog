@@ -1,5 +1,5 @@
-var dataController = require('../app/controllers/dataController.js');
+var waveController = require('../app/controllers/waveController.js');
 
 module.exports = function (app) {
-  app.get('/', dataController.first);
+  app.get('/api/wave/:user/:page', waveController.page);
 };
