@@ -1,9 +1,20 @@
 var express = require('express'),
-  routes = require('./config/routes.js');
+  mongoconf = require('./config/mongo.js'),
+  fs = require('fs');
+
+
+var modelsPath = __dirname + '/app/models';
+mongoconf.connectToMongo();
+
+fs.readdirSync(modelsPath).forEach(function (file) {
+  if (file.indexOf('.js') >= 0) {
+    require(modelsPath + '/' + file);
+  }
+});
 
 var app = express();
 
-routes(app);
+require('./config/routes.js')(app);
 
 //logging
 app.use(function (req, res, next) {
