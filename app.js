@@ -1,6 +1,7 @@
 var express = require('express'),
   mongoconf = require('./config/mongo.js'),
-  fs = require('fs');
+  fs = require('fs'),
+  config = require('./config/config');
 
 
 var modelsPath = __dirname + '/app/models';
@@ -14,6 +15,7 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 
 var app = express();
 
+require('./config/express')(app, config);
 require('./config/routes.js')(app);
 
 //logging
