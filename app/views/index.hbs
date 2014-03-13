@@ -1,12 +1,11 @@
 <html>
 <head>
   <title>vizlog.</title>
+  <link rel="stylesheet" type="text/css" href="dist/style.css">
 </head>
 <body>
-<select value="{{chosenUser}}">
-  {{# each users}}
-  <option value="{{.}}">{{.}}</li>
-  {{/each}}
-</select>
+<section id="main-region"></section>
+
+<script data-main="src/scripts/init" src="lib/requirejs/require.js"></script>
 </body>
 </html>

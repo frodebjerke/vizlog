@@ -1,0 +1,13 @@
+{
+  "name": "logviz-web",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs": "latest",
+    "underscore-amd": "latest",
+    "jquery": "~1.9.x",
+    "backbone-amd": "~1.1.x",
+    "marionette": "~1.6.x",
+    "require-handlebars-plugin": "latest"
+  },
+  "directory": "public/lib"
+}
