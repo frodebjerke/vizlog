@@ -7,7 +7,7 @@ define([
 function (Backbone, LogViz) {
   var MainController = Backbone.Marionette.Controller.extend({
     logVizModule: function () {
-      Vizlog.module('per-doc-viz', LogViz, Vizlog.main).start();
+      Vizlog.module('per-doc-viz', LogViz);
     }
   });
   return MainController;
