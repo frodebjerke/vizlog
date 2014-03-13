@@ -3,20 +3,27 @@ define([
 
     // Views
     'log-viz/views/controls',
+    'log-viz/views/logVizLayout',
 
     // Entities
     'entities/controls'
 ],
-function (Backbone, ControlsView, Controls) {
+function (Backbone, ControlsView, Layout, Controls) {
   var LogVizController = Backbone.Marionette.Controller.extend({
     initialize: function (options) {
       this.region = options.region;
-      this.view = this.renderControls();
+      this.layout = this.renderLayout();
+      this.renderControls(this.layout.controls);
     },
-    renderControls: function () {
+    renderLayout: function () {
+      var layout = new Layout();
+      this.region.show(layout);
+      return layout;
+    },
+    renderControls: function (region) {
       var controls = new Controls();
       var view = new ControlsView({model: controls});
-      this.region.show(view);
+      region.show(view);
       return view;
     }
   });

@@ -7,7 +7,7 @@ define([
       initialize: function (options) {
         this.model.fetch();
 
-        this.listenTo(this.model, "change", function () {
+        this.listenTo(this.model, "change:user", function () {
           this.render();
           console.log(this.model);
         });

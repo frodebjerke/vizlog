@@ -1,8 +1,8 @@
 <section>
 <h1>{{this.name}}</h1>
-<select>
+<select value="{{this.user}}">
   {{# each this.users}}
-  <option value="{{.}}">{{.}}</select>
+  <option value="{{.}}">{{.}}</option>
   {{/each}}
 </select>
 </section>

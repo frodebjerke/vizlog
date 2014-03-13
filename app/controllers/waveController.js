@@ -18,7 +18,8 @@ exports.users = function (req, res) {
     if (err) throw new Error(err);
     var model = {
       users: resp,
-      name: "lol"
+      name: "lol",
+      user: resp.length > 0 ? resp[0] : "" 
     };
     console.log(model);
     res.send(model);
