@@ -1,3 +1,8 @@
 <section>
-<h1>yallaville!</h1>
+<h1>{{this.name}}</h1>
+<select>
+  {{# each this.users}}
+  <option value="{{.}}">{{.}}</select>
+  {{/each}}
+</select>
 </section>

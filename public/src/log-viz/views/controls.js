@@ -3,7 +3,15 @@ define([
   'hbs!log-viz/templates/controls'
   ], function (Marionette, ControlsTmpl) {
     return Marionette.ItemView.extend({
-      template: ControlsTmpl
+      template: ControlsTmpl,
+      initialize: function (options) {
+        this.model.fetch();
+
+        this.listenTo(this.model, "change", function () {
+          this.render();
+          console.log(this.model);
+        });
+      }
     });
   }
 );

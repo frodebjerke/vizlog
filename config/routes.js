@@ -3,5 +3,6 @@ var waveController = require('../app/controllers/waveController.js'),
 
 module.exports = function (app) {
   app.get('/', homeController.index)
-  app.get('/api/wave/:user/:page', waveController.page);
+  app.get('/api/logs/:user/:page', waveController.page);
+  app.get('/api/users', waveController.users)
 };

@@ -12,3 +12,15 @@ exports.page = function (req, res) {
     res.send(wave);
   });
 };
+
+exports.users = function (req, res) {
+  Wave.distinct('user', {}, function (err, resp) {
+    if (err) throw new Error(err);
+    var model = {
+      users: resp,
+      name: "lol"
+    };
+    console.log(model);
+    res.send(model);
+  });
+};
