@@ -3,6 +3,10 @@
   <title>vizlog.</title>
 </head>
 <body>
-  <h1>{{lol}}</h1>
+<select value="{{chosenUser}}">
+  {{# each users}}
+  <option value="{{.}}">{{.}}</li>
+  {{/each}}
+</select>
 </body>
 </html>
