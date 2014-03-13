@@ -1,5 +1,5 @@
 define([
-  'src/scripts/per-doc-viz/views/controls.js'
+  'src/per-doc-viz/views/controls.js'
   ],
 function (ControlsView) {
   return function (PerDocViz, App) {

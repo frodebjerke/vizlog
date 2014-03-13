@@ -1,4 +1,4 @@
-var lib = '../../lib/';
+var lib = '../lib/';
 
 require.config({
   deps: ['backbone.marionette', 'main'],
