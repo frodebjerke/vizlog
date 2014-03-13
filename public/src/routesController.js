@@ -2,12 +2,12 @@ define([
     'backbone',
 
     // Modules
-    'per-doc-viz/perDocViz'
+    'log-viz/logViz'
 ],
-function (Backbone, PerDocViz) {
+function (Backbone, LogViz) {
   var MainController = Backbone.Marionette.Controller.extend({
-    perDocViz: function () {
-      Vizlog.module('per-doc-viz', PerDocViz, Vizlog.main).start();
+    logVizModule: function () {
+      Vizlog.module('per-doc-viz', LogViz, Vizlog.main).start();
     }
   });
   return MainController;
