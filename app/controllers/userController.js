@@ -31,7 +31,8 @@ exports.users = function (req, res) {
   }).exec(function (err, resp) {
     if (err) throw new Error(err);
     var model = {
-      users: resp
+      users: resp,
+      user: resp.length > 0 ? resp[0] : {}
     };
     res.send(model);
   });
