@@ -11,6 +11,13 @@ define([
           this.render();
           console.log(this.model);
         });
+      },
+      events: {
+        'change select' : 'changeUser'
+      },
+      changeUser: function (e) {
+        var selectedUser = e.currentTarget.value;
+        this.model.set('user', selectedUser);
       }
     });
   }
