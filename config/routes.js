@@ -9,5 +9,6 @@ module.exports = function (app) {
   // API
   app.get('/api/logs/:user/:page', logPageController.page);
 
+  app.get('/api/users/:user', userController.user);
   app.get('/api/users', userController.users);
 };

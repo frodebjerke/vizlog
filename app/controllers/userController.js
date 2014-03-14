@@ -2,16 +2,34 @@ var mongoose = require('mongoose'),
   LogPage = mongoose.model('LogPage'),
   _ = require('underscore');
 
-exports.users = function (req, res) {
-  LogPage.distinct('user', {}, function (err, resp) {
+exports.user = function (req, res) {
+  var _user = req.params.user;
+  LogPage.distinct('type', {user: _user}, function (err, resp) {
     if (err) throw new Error(err);
-    var users = _.map(resp, function (user) {
-      return {id: user};
-    });
-    var model = {
-      users: users
-    };
-    console.log(model);
-    res.send(model);
+    res.send(resp);
+  });
+};
+
+exports.users = function (req, res) {
+  LogPage.aggregate({
+    $group: {
+      "_id": {user: "$user", type: "$type"},
+      "pages": {$sum: 1},
+      "starttime": {$min: "$starttime"},
+      "endtime": {$max: "$endtime"}
+    }
+  }, {
+    $group: {
+      "_id": "$_id.user",
+      "types": {$push: {
+        "type": "$_id.type",
+        "pages": "$pages",
+        "starttime": "$starttime",
+        "endtime": "$endtime"
+      }}
+    }
+  }).exec(function (err, resp) {
+    if (err) throw new Error(err);
+    res.send(resp);
   });
 };
