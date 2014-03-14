@@ -12,16 +12,3 @@ exports.page = function (req, res) {
     res.send(wave);
   });
 };
-
-exports.users = function (req, res) {
-  LogPage.distinct('user', {}, function (err, resp) {
-    if (err) throw new Error(err);
-    var model = {
-      users: resp,
-      name: "lol",
-      user: resp.length > 0 ? resp[0] : ""
-    };
-    console.log(model);
-    res.send(model);
-  });
-};
