@@ -30,6 +30,9 @@ exports.users = function (req, res) {
     }
   }).exec(function (err, resp) {
     if (err) throw new Error(err);
-    res.send(resp);
+    var model = {
+      users: resp
+    };
+    res.send(model);
   });
 };

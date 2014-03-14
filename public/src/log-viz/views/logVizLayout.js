@@ -7,10 +7,10 @@ define([
       template: Tmpl,
       regions: {
         controls: '#controls-region',
+        user: "#user-region",
         graph: '#graph-region'
       },
       initialize: function (options) {
-        console.log("hello");
       }
     });
     return Layout;
