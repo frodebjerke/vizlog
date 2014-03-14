@@ -2,11 +2,11 @@ define([
     'backbone',
 
     // Views
-    'log-viz/views/controls',
+    'log-viz/views/controlsView',
     'log-viz/views/logVizLayout',
 
     // Entities
-    'entities/controls'
+    'entities/controlsModel'
 ],
 function (Backbone, ControlsView, Layout, Controls) {
   var LogVizController = Backbone.Marionette.Controller.extend({

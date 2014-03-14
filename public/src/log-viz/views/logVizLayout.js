@@ -1,6 +1,6 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/logViz'
+  'hbs!log-viz/templates/logVizTmpl'
   ],
   function (Marionette, Tmpl) {
     var Layout = Marionette.Layout.extend({
