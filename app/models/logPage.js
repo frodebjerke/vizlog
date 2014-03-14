@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
-var Wave = new Schema({
+var LogPage = new Schema({
   "user": String,
   "type": String,
   "page": Number,
@@ -10,6 +10,8 @@ var Wave = new Schema({
   "granularity": String,
   "frequency": String,
   "values": {}
+}, {
+  "collection": "logs"
 });
 
-mongoose.model('Wave', Wave);
+mongoose.model('LogPage', LogPage);

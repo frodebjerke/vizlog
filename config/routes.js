@@ -1,8 +1,11 @@
-var waveController = require('../app/controllers/waveController.js'),
+var logPageController = require('../app/controllers/logPageController.js'),
   homeController = require('../app/controllers/homeController.js');
 
 module.exports = function (app) {
-  app.get('/', homeController.index)
-  app.get('/api/logs/:user/:page', waveController.page);
-  app.get('/api/users', waveController.users)
+  // Views
+  app.get('/', homeController.index);
+
+  // API
+  app.get('/api/logs/:user/:page', logPageController.page);
+  app.get('/api/users', logPageController.users);
 };
