@@ -15,7 +15,7 @@ define([
         var height = 500;
 
         var x = d3.scale.linear().domain([0, data.length]).range([0+margin, width-margin  ]);
-        var y = d3.scale.linear().domain(d3.extent(data,function (d) { return d; })).range([0+margin, height]);
+        var y = d3.scale.linear().domain(d3.extent(data,function (d) { return d; })).range([0+margin, height-margin]);
 
         var vis = d3.select(options.el)
             .append("svg:svg")
@@ -62,6 +62,35 @@ define([
             .attr("text-anchor", "right")
             .attr("dy", 4);
 
-        }
+        var focus = vis.append("g")
+            .attr("class", "focus")
+            .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 4.5);
+
+        focus.append("text")
+            .attr("x", 9)
+            .attr("dy", ".35em");
+
+
+        var mousemove = function () {
+          var x0 = x.invert(d3.mouse(this)[0]);
+          x0 = x0 - (x0 % 1);
+          d0 = data[x0];
+          focus.attr("transform", "translate("+x(x0)+","+ (height - y(d0))+")");
+          focus.select("text").text("X: "+x0+ "\tY: "+d0);
+        };
+
+        vis.append("rect")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+
+      }
     };
 });

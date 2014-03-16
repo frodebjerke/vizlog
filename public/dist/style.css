@@ -1,13 +1,25 @@
 
 .el-linegraph path {
-  stroke: steelblue;
+  stroke: #15303e;
   stroke-width: 1;
   fill: none;
 }
 .el-linegraph line {
-  stroke: black;
+  stroke: #341f13;
 }
 .el-linegraph text {
   font-family: Arial;
   font-size: 9pt;
+}
+.el-linegraph .overlay {
+  fill: none;
+  pointer-events: all;
+}
+.el-linegraph .focus circle {
+  fill: none;
+  stroke: #2a1910;
+}
+.el-linegraph .posinfo {
+  stroke: #341f13;
+  fill: #eeeeee;
 }

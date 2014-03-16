@@ -1,16 +1,39 @@
+
+@pri1: #15303e;
+@pri2: #183849;
+@pri3: #194054;
+@com1: #341f13;
+@com2: #2a1910;
+@white: #eee;
+
+
 .el-linegraph {
   path {
-      stroke: steelblue;
+      stroke: @pri1;
       stroke-width: 1;
       fill: none;
   }
 
   line {
-      stroke: black;
+      stroke: @com1;
   }
 
   text {
       font-family: Arial;
       font-size: 9pt;
+  }
+
+  .overlay {
+    fill: none;
+    pointer-events: all;
+  }
+
+  .focus circle {
+    fill: none;
+    stroke: @com2;
+  }
+  .posinfo {
+    stroke: @com1;
+    fill: @white;
   }
 }
