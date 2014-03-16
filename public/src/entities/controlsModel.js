@@ -1,10 +1,9 @@
 define([
-  'backbone'
+  'backbone',
+  'underscore'
   ],
-function (Backbone) {
+function (Backbone, _, User) {
   return Backbone.Model.extend({
     url: 'api/users',
-    initialize: function() {
-    },
   });
 });

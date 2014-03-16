@@ -7,7 +7,7 @@ module.exports = function (app) {
   app.get('/', homeController.index);
 
   // API
-  app.get('/api/logs/:user/:page', logPageController.page);
+  app.get('/api/logs/:user/:type/:page', logPageController.page);
 
   app.get('/api/users/:user', userController.user);
   app.get('/api/users', userController.users);

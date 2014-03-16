@@ -1,0 +1,13 @@
+
+.el-linegraph path {
+  stroke: steelblue;
+  stroke-width: 1;
+  fill: none;
+}
+.el-linegraph line {
+  stroke: black;
+}
+.el-linegraph text {
+  font-family: Arial;
+  font-size: 9pt;
+}

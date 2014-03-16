@@ -1,11 +1,20 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/userTmpl',
+  'hbs!log-viz/templates/userTmpl'
   ], function (Marionette, Tmpl) {
-    return Marionette.ItemView.extend({
+    var typeView = Marionette.ItemView.extend({
       template: Tmpl,
-      initialize: function (options) {
-        console.log("user view created");
+      tagName: 'li',
+      events: {
+        'change input[type="checkbox"]': 'changeGraphVisibility'
+      },
+      changeGraphVisibility: function (e) {
+        this.model.set('showInGraph', e.currentTarget.checked);
       }
+    });
+
+    return Marionette.CollectionView.extend({
+      itemView: typeView,
+      tagName: 'ul',
     });
 });

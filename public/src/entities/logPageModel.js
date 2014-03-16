@@ -3,9 +3,8 @@ define([
   ],
 function (Backbone) {
   return Backbone.Model.extend({
-    urlRoot: 'api/logs',
-		initialize: function() {
-			console.log("new log entity");
-		}
+    url: function () {
+      return 'api/logs/' + this.get('user') +'/'+ this.get('type')+'/'+this.get('page');
+    }
   });
 });

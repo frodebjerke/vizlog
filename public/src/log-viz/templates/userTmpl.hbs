@@ -1,6 +1,3 @@
-<h1>Selected user: {{this._id}}</h1>
-<ul>
-  {{# each this.types}}
-  <li><input type="checkbox" value="{{show}}"/> - {{type}} - {{pages}} - {{starttime}} - {{endtime}}</li>
-  {{/each}}
-</ul>
+{{# with this}}
+<input type="checkbox" value="{{showInGraph}}" data-index={{@index}}/> - {{type}} - {{pages}} - {{starttime}} - {{endtime}}
+{{/with}}

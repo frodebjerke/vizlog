@@ -7,7 +7,8 @@
     "jquery": "~1.9.x",
     "backbone-amd": "~1.1.x",
     "marionette": "~1.6.x",
-    "require-handlebars-plugin": "latest"
+    "require-handlebars-plugin": "latest",
+    "d3": "latest"
   },
   "directory": "public/lib"
 }

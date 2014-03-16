@@ -32,7 +32,7 @@ exports.users = function (req, res) {
     if (err) throw new Error(err);
     var model = {
       users: resp,
-      user: resp.length > 0 ? resp[0] : {}
+      user: resp.length > 0 ? resp[2] : {}
     };
     res.send(model);
   });

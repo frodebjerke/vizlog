@@ -3,8 +3,8 @@ define([
   ],
 function (Backbone) {
   return Backbone.Model.extend({
-    initialize: function() {
-      console.log("new log entity");
+    initialize: function(options) {
+      this.set('types', new Backbone.Collection(options.types));
     }
   });
 });
