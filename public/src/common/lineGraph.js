@@ -4,56 +4,102 @@ define([
   ],
   function (d3, _) {
     return function (options) {
-      if (options.page.values) {
-        // serialize data
-        var data = _.reduce(options.page.values, function (memo, b) {
-          return memo.concat(_.toArray(b));
-        }, []);
+      // Required for init
+      this.el = options.el;
 
-        var margin = 30;
-        var width = 1400;
-        var height = 500;
+      // Parameters
+      this.margin = options.margin || 30;
+      this.width = options.width || 1400;
+      this.height = options.height || 500;
 
-        var x = d3.scale.linear().domain([0, data.length]).range([0+margin, width-margin  ]);
-        var y = d3.scale.linear().domain(d3.extent(data,function (d) { return d; })).range([0+margin, height-margin]);
+      this.xticks = options.xticks || function () { return this.x.ticks(7); };
+      this.yticks = options.yticks || function () { return this.y.ticks(10); };
 
-        var vis = d3.select(options.el)
-            .append("svg:svg")
-            .attr("width", width)
-            .attr("height", height);
+      // Overwriteable functions
+      this.xdomain = options.xdomain || function (data) {
+        return [0, data.length];
+      };
+      this.ydomain = options.ydomain || function (data) {
+        return d3.extent(data, function (d) { return d; });
+      };
 
-        var g = vis.append("svg:g")
-            .attr("transform", "translate(0, "+height+")");
+      this.createLineGraph = options.createLineGraph || function (data) {
+        this.y = setX(data);
+        this.x = setY(data);
+        this.setSvg();
+        this.graph = this.addGraph(0, this.height);
+        this.lineGraphLayout();
+        this.showValuesOnHover();
+      };
 
-        var line = d3.svg.line()
-            .x(function (d, i) { return x(i);})
+
+
+      // Should prob not overwrite
+      this.setX = function (data) {
+        return d3.scale.linear().domain(this.xdomain(data)).range([0 + this.margin, this.width - this.margin]);
+      };
+      this.setY = function (data) {
+        return d3.scale.linear().domain(this.ydomain(data)).range([0 + this.margin, this.height - this.margin]);
+      };
+
+      this.line = function (data) {
+        return d3.svg.line()
+            .x(function (d, i) { return x(i); })
             .y(function (d) { return -1 * y(d); });
+      };
 
-        g.append("svg:path").attr("d", line(data));
+      this.addPathToGraph = function (data) {
+        return this.graph.append("svg:path")
+            .attr("d", this.line(data));
+      };
 
-        g.append("svg:line")
-            .attr("x1", x(0))
-            .attr("x2", x(data.length))
-            .attr("y1", - y(0))
-            .attr("y2", - y(0));
+      this.changeDataInPath = function (path, data) {
+        path.attr("d", this.line(data));
+      };
 
-        g.append("svg:line")
-            .attr("x1", x(0))
-            .attr("x2", x(0))
-            .attr("y1", 0 - margin)
-            .attr("y2", -height -margin);
+      //
+      // LINE GRAPH LAYOUT AREA
+      this.lineGraphLayout = function () {
+        this.addXLine();
+        this.addYLine();
 
-        g.selectAll(".xLabel")
-            .data(x.ticks(10))
+        this.addXLabels();
+        this.addYLabels();
+      };
+
+      this.addXLine = function () {
+        this.graph.append("svg:line")
+            .attr("x1", this.x(this.xdomain[0]))
+            .attr("x2", this.x(this.xdomain[1]))
+            .attr("y1", y(0))
+            .attr("y2", y(0));
+      };
+
+      this.addYLine = function () {
+        this.graph.append("svg:line")
+            .attr("x1", this.x(0))
+            .attr("x2", this.x(0))
+            .attr("y1", 0 - this.margin)
+            .attr("y2", - this.height - this.margin);
+      };
+
+      this.addXLabels = function () {
+        var ticks = this.xticks();
+        this.graph.selectAll(".xLabel")
+            .data(ticks)
             .enter().append("svg:text")
             .attr("class", "xLabel")
             .text(String)
-            .attr("x", function(d) { return x(d); })
+            .attr("x", function(d) { return this.x(d); })
             .attr("y", 0)
             .attr("text-anchor", "middle");
+      };
 
-        g.selectAll(".yLabel")
-            .data(y.ticks(8))
+
+      this.addYLabels = function () {
+        var ticks = this.yticks();
+        this.graph.selectAll(".yLabel")
+            .data(ticks)
             .enter().append("svg:text")
             .attr("class", "yLabel")
             .text(String)
@@ -61,8 +107,10 @@ define([
             .attr("y", function(d) { return -1 * y(d); })
             .attr("text-anchor", "right")
             .attr("dy", 4);
+      };
 
-        var focus = vis.append("g")
+      this.showValuesOnHover = function (data) {
+        var focus = this.svg.append("g")
             .attr("class", "focus")
             .style("display", "none");
 
@@ -73,24 +121,23 @@ define([
             .attr("x", 9)
             .attr("dy", ".35em");
 
-
         var mousemove = function () {
-          var x0 = x.invert(d3.mouse(this)[0]);
+          var x0 = this.x.invert(d3.mouse(this)[0]);
           x0 = x0 - (x0 % 1);
           d0 = data[x0];
-          focus.attr("transform", "translate("+x(x0)+","+ (height - y(d0))+")");
+          focus.attr("transform", "translate("+this.x(x0)+","+ (this.height - this.y(d0))+")");
           focus.select("text").text("X: "+x0+ "\tY: "+d0);
         };
 
-        vis.append("rect")
+        this.svg.append("rect")
             .attr("class", "overlay")
-            .attr("width", width)
-            .attr("height", height)
+            .attr("width", this.width)
+            .attr("height", this.height)
             .on("mouseover", function() { focus.style("display", null); })
             .on("mouseout", function() { focus.style("display", "none"); })
             .on("mousemove", mousemove);
+      };
 
-
-      }
+      return this;
     };
 });
