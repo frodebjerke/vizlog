@@ -7,11 +7,23 @@ function (Backbone, _) {
     url: function () {
       return 'api/logs/' + this.get('user') +'/'+ this.get('type')+'/'+this.get('page');
     },
-    getArray: function () {
+
+    // Input in s
+    getArray: function (start, count) {
+      start = start * this.get("frequence"); // Adjust to Hz
+      count = count * this.get("frequence");
       var values = this.get("values");
-      return _.reduce(values, function (memo, b) {
+      if (start !== 0)
+        start = start - this.get("starttime");
+
+      var array = _.reduce(values, function (memo, b) {
         return memo.concat(_.toArray(b));
       }, []);
+      return array.slice(start, start + count);
+    },
+    sync: function (method, model, options) {
+      options.url = this.url();
+      return Backbone.sync(method, model, options);
     }
   });
 });

@@ -5,8 +5,8 @@ var LogPage = new Schema({
   "user": String,
   "type": String,
   "page": Number,
-  "starttime": Date,
-  "endttime": Date,
+  "starttime": Number,
+  "endttime": Number,
   "granularity": String,
   "frequency": String,
   "values": {}

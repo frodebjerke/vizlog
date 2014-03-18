@@ -17,6 +17,7 @@ require.config({
     backbone: lib + 'backbone-amd/backbone',
     hbs: lib + 'require-handlebars-plugin/hbs',
     d3: lib + 'd3/d3',
+    async: lib+ 'async/lib/async',
     'backbone.marionette': lib + 'marionette/lib/core/amd/backbone.marionette',
     'backbone.wreqr': lib + 'backbone.wreqr/lib/amd/backbone.wreqr',
     'backbone.babysitter': lib + 'backbone.babysitter/lib/amd/backbone.babysitter',
