@@ -2,34 +2,76 @@ define([
   'common/graph/graph',
   'entities/pathCollection',
   'entities/pathModel',
+  'entities/graphConfigModel',
   'd3'
   ],
-function (graph, Paths, Path, d3) {
+function (graph, Paths, Path, Config, d3) {
   return function (options) {
 
     // Setup
     var lg = graph(options);
 
     lg.paths = options.paths || new Paths([new Path()]);
-    lg.config = options.config || new Config({
-    });
+    lg.config = options.config || new Config();
 
-    // Populate etc
-    lg.paths.forEach(function (path) {
-      console.log("init:hasPath");
-      console.log(path);
-    });
+    // Render
+    var getXDomain = function () {
+      var freq = lg.paths.first().get('logpages').first().get("frequence");
+      return [lg.config.get('starttime') * freq, lg.config.get('length') * freq];
+    };
+    var getYDomain = function () {
+      var ydomain = [lg.config.get("ymin"), lg.config.get("ymax")];
+      return lg.paths.reduce(function (memo, d) {
+        var domain = d3.extent(d.get('data'), function (v) { return v; });
+        memo[0] = domain[0] < memo[0] ? domain[0] : memo[0];
+        memo[1] = domain[1] > memo[1] ? domain[1] : domain[1];
+        return memo;
+      }, ydomain);
+    };
 
+    var setX = function () {
+      var margin = lg.margin;
+      var width = lg.width;
+      return d3.scale.linear().domain(getXDomain()).range([0 + margin, width - margin]);
+    };
+
+    var setY = function () {
+      var margin = lg.margin;
+      var height = lg.height;
+      return d3.scale.linear().domain(getYDomain()).range([0 + margin, height - margin]);
+    };
+
+    var defaultLine = function (x, y) {
+      return d3.svg.line()
+          .x(function (d, i) { return x(i); })
+          .y(function (d) { return -1 * y(d); });
+    };
+
+    var addPathToGraph = function (graph, data, line) {
+      console.log(graph);
+      return graph.append("svg:path")
+          .attr("d", line(data));
+    };
+
+    // Orchestrate population
+    var renderGraph = function () {
+      lg.x = setX();
+      lg.y = setY();
+      lg.line = defaultLine(lg.x, lg.y);
+      lg.lines = lg.paths.map(function (path) {
+        return addPathToGraph(lg.graph, path.get("data"), lg.line);
+      });
+    };
 
     // Events
     lg.paths.on('add', function (path) {
       console.log("paths:add");
-      console.log(path);
+      renderGraph();
     });
 
     lg.paths.on('change', function (path) {
       console.log("paths:change");
-      console.log(path);
+      renderGraph();
     });
 
     lg.paths.on('remove', function (path) {
