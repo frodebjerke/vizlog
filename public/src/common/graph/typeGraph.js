@@ -9,8 +9,8 @@ function (graph, Paths, Path, Config, d3) {
   return function (options) {
 
     // Setup
-    var lg = graph(options);
-
+    var lg = graph(options.config);
+    
     lg.paths = options.paths || new Paths([new Path()]);
     lg.config = options.config || new Config();
 
