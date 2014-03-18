@@ -6,8 +6,9 @@ define([
     var Layout = Marionette.Layout.extend({
       template: Tmpl,
       regions: {
-        controls: '#controls-region',
-        user: "#user-region",
+        config: '#config-region',
+        paths: "#paths-region",
+        addpath: "#addpath-region",
         graph: '#graph-region'
       },
       initialize: function (options) {

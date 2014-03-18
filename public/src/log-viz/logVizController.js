@@ -3,13 +3,15 @@ define([
 
     // Views
     'log-viz/views/graphView',
+    'log-viz/views/pathsView',
+    'log-viz/views/addPathView',
     'log-viz/views/logVizLayout',
 
     // Entities
     'entities/graphConfigModel',
     'entities/pathCollection'
 ],
-function (Backbone, GraphView, Layout, Config, Paths) {
+function (Backbone, GraphView, PathsView, AddPathView, Layout, Config, Paths) {
   var LogVizController = Backbone.Marionette.Controller.extend({
     initialize: function (options) {
       this.region = options.region;
@@ -19,6 +21,7 @@ function (Backbone, GraphView, Layout, Config, Paths) {
       this.layout = this.renderLayout();
       var configview = this.renderConfig(this.layout.config, config);
       var pathsview = this.renderPaths(this.layout.paths, paths);
+      var addpathview = this.renderAddPath(this.layout.addpath, paths);
       var graphview = this.renderGraph(this.layout.graph, paths, config);
     },
     renderLayout: function () {
@@ -29,8 +32,15 @@ function (Backbone, GraphView, Layout, Config, Paths) {
     renderConfig: function (config) {
 
     },
-    renderPaths: function (paths) {
-
+    renderPaths: function (region, paths) {
+      var view = new PathsView({collection: paths});
+      region.show(view);
+      return view;
+    },
+    renderAddPath: function (region, paths) {
+      var view = new AddPathView({paths: paths});
+      region.show(view);
+      return view;
     },
     renderGraph: function (region, paths, config) {
       var model = new Backbone.Model({config: config, paths: paths});

@@ -15,7 +15,6 @@ function (Marionette, Tmpl, Path, Paths, Config, typeGraph, d3) {
 
       },
       onShow: function () {
-        console.log(this.model)
         var tg = typeGraph({
           paths: this.model.get('paths'),
           config: this.model.get('config')

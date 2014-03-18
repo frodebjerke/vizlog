@@ -10,7 +10,7 @@ function (graph, Paths, Path, Config, d3) {
 
     // Setup
     var lg = graph(options.config);
-    
+
     lg.paths = options.paths || new Paths([new Path()]);
     lg.config = options.config || new Config();
 
@@ -66,7 +66,7 @@ function (graph, Paths, Path, Config, d3) {
     // Events
     lg.paths.on('add', function (path) {
       console.log("paths:add");
-      renderGraph();
+      //renderGraph();
     });
 
     lg.paths.on('change', function (path) {
