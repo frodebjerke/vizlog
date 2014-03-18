@@ -48,7 +48,6 @@ function (graph, Paths, Path, Config, d3) {
     };
 
     var addPathToGraph = function (graph, data, line) {
-      console.log(graph);
       return graph.append("svg:path")
           .attr("d", line(data));
     };
