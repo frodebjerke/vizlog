@@ -9,8 +9,6 @@ function (Backbone) {
       starttime: 0,
       length: 60,
       el: "#graph",
-      height: 500,
-      width: 1500,
       margin: 30
     }
   });

@@ -52,14 +52,33 @@ function (graph, Paths, Path, Config, d3) {
           .attr("d", line(data));
     };
 
-    // Orchestrate population
-    var renderGraph = function () {
-      lg.x = setX();
-      lg.y = setY();
-      lg.line = defaultLine(lg.x, lg.y);
-      lg.lines = lg.paths.map(function (path) {
-        return addPathToGraph(lg.graph, path.get("data"), lg.line);
+    var removeLines = function () {
+      _.each(lg.lines, function (line) {
+        line.remove();
       });
+    };
+
+    var resetSize = function () {
+      var width = lg.getWidth();
+      var height = lg.getHeight();
+      lg.svg.attr('width', width).attr('height', height);
+      lg.graph.attr("transform", "translate("+0+", "+height+")");
+      lg.width = width;
+      lg.height = height;
+    };
+
+    // Orchestrate population
+    lg.renderGraph = function () {
+      removeLines();
+      resetSize();
+      if (lg.paths.length) {
+        lg.x = setX();
+        lg.y = setY();
+        lg.line = defaultLine(lg.x, lg.y);
+        lg.lines = lg.paths.map(function (path) {
+          return addPathToGraph(lg.graph, path.get("data"), lg.line);
+        });
+      }
     };
 
     // Events
@@ -70,7 +89,7 @@ function (graph, Paths, Path, Config, d3) {
 
     lg.paths.on('change', function (path) {
       console.log("paths:change");
-      renderGraph();
+      lg.renderGraph();
     });
 
     lg.paths.on('remove', function (path) {

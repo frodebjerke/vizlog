@@ -19,6 +19,8 @@ function (Marionette, Tmpl, Path, Paths, Config, typeGraph, d3) {
           paths: this.model.get('paths'),
           config: this.model.get('config')
         });
+
+        $(window).on("resize", tg.renderGraph);
       }
   });
 });

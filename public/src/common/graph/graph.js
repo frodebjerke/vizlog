@@ -4,9 +4,18 @@ define([
 function (d3) {
   return function (config) {
     var el = config.get('el'),
-        width = config.get('width'),
-        height = config.get('height'),
         margin = config.get('margin');
+
+    var getWidth = function () {
+      return $(el).width();
+    };
+
+    var getHeight = function () {
+      return Math.floor(getWidth() / 2);
+    };
+
+    var width = getWidth();
+    var height = getHeight();
 
     var svg = function () {
       return d3.select(el)
@@ -26,7 +35,9 @@ function (d3) {
       graph: graph,
       width: width,
       height: height,
-      margin: margin
+      margin: margin,
+      getWidth: getWidth,
+      getHeight: getHeight
     };
   };
 });
