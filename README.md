@@ -1,4 +1,4 @@
-logviz - a log data visualisation tool.
+logviz - a visualisation tool for time series data.
 =====
 
 Running the application
