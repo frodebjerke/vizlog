@@ -21,7 +21,7 @@ function (Backbone, GraphView, PathsView, AddPathView, Layout, Config, Paths) {
       this.layout = this.renderLayout();
       var configview = this.renderConfig(this.layout.config, config);
       var pathsview = this.renderPaths(this.layout.paths, paths);
-      var addpathview = this.renderAddPath(this.layout.addpath, paths);
+      var addpathview = this.renderAddPath(this.layout.addpath, paths, config);
       var graphview = this.renderGraph(this.layout.graph, paths, config);
     },
     renderLayout: function () {
@@ -37,8 +37,9 @@ function (Backbone, GraphView, PathsView, AddPathView, Layout, Config, Paths) {
       region.show(view);
       return view;
     },
-    renderAddPath: function (region, paths) {
-      var view = new AddPathView({paths: paths});
+    renderAddPath: function (region, paths, config) {
+      var model = new Backbone.Model({paths: paths, config: config});
+      var view = new AddPathView({model: model});
       region.show(view);
       return view;
     },

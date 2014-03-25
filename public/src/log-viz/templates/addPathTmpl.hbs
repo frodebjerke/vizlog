@@ -1,1 +1,33 @@
-<button>Add a Page</button>
+<form class="form">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-lg-12 form-group">
+        <label class="">User:</label>
+        <input type="text" class="form-control col-xs-9" placeholder="User"/>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
+      <label class="">Start:</label>
+      <input type="text" class="form-control input-sm" placeholder="Start"/>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-lg-6  form-group">
+      <label class="">Stop:</label>
+      <input type="text" class="form-control input-sm" placeholder="Stop"/>
+    </div>
+  </div>
+  <div class="form-group">
+    <button type="submit" onclick="return false" class="btn btn-primary">Add path</button>
+  </div>
+</form>
+
+
+<!--   {{# with this}}
+<select>
+  {{# each users}}
+  <option value="{{_id}}">{{_id}}</option>
+  {{/each}}
+</select>
+<hr />
+{{type.pages}}
+{{type.starttime}}
+{{type.endtime}}
+{{/with}}
+  <a href="javascript:" class="addpath-submit">+</a> -->

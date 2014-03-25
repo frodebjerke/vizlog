@@ -1,4 +1,10 @@
 
+.el-addpath {
+  padding: 2em;
+  background-color: #341f13;
+  color: #eeeeee;
+}
+
 .el-linegraph path {
   stroke: #15303e;
   stroke-width: 1;
@@ -51,6 +57,10 @@
   stroke: #DECF3F;
 }
 
+.el-paths {
+  min-height: 4em;
+  background-color: #194054;
+}
 .el-paths ul {
   list-style: none;
   margin: 0;
