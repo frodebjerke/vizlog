@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
         <label class="">User:</label>
-        <select class="form-control">
+        <select class="form-control addpath-user">
           {{# each users}}
-          <option value="{{_id}}">{{_id}}</option>
+          <option value="{{_id}}" {{selected}}>{{_id}}</option>
           {{/each}}
         </select>
     </div>
@@ -17,7 +17,7 @@
     <div class="clearfix visible-lg visible-xs"></div>
     <div class="col-xs-6 col-sm-4 col-lg-6  form-group">
       <label class="">Startpoint:</label>
-      <input type="text" class="form-control" value="{{current.starttime}}"/>
+      <input type="text" class="form-control addpath-startpoint" value="{{current.starttime}}"/>
     </div>
     <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
       <label class="">Data range:</label>

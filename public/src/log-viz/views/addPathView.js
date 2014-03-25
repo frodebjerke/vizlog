@@ -1,8 +1,9 @@
 define([
   'backbone.marionette',
   'hbs!log-viz/templates/addPathTmpl',
-  'entities/controlsModel'
-  ], function (Marionette, Tmpl, Controls) {
+  'entities/controlsModel',
+  'entities/pathModel'
+  ], function (Marionette, Tmpl, Controls, Path) {
     return Marionette.ItemView.extend({
       template: Tmpl,
       className: "row",
@@ -21,19 +22,33 @@ define([
         controls.fetch();
       },
       onRender: function () {
-        console.log("addpath:onrender")
+        console.log("addpath:onrender");
       },
       events: {
         'click  button[type="submit"]' : 'addPath',
         'change select' : 'changeUser'
       },
       addPath: function (e) {
-        console.log(e)
+        var form = e.currentTarget.form;
+        var start = $(form).find('.addpath-startpoint')[0].value;
+        var current = this.model.get("current");
+
+        var path = new Path({user: current.user, type: current.type, start: start, length: 120});
+        var paths = this.model.get("paths");
+        console.log(path);
+        paths.add(path);
       },
       changeUser: function (e) {
         var selectedUser = e.currentTarget.value;
         var user = _.find(this.model.get('users'), function (user) {
-          return user._id === selectedUser;
+          if (user._id === selectedUser) {
+            user.selected = "selected";
+            return true;
+          }
+          else {
+            user.selected = "";
+            return false;
+          }
         });
         this.setCurrent(user);
         this.render();
@@ -48,7 +63,8 @@ define([
           user: user._id,
           starttime: usertype.starttime,
           endtime: usertype.endtime,
-          pages: usertype.pages
+          pages: usertype.pages,
+          type: type
         };
 
         this.model.set('current', current);
