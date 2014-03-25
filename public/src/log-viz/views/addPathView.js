@@ -13,22 +13,19 @@ define([
         controls.once('change', function () {
           var users = controls.get('users');
           var user = _.first(users);
-          var type = _.find(user.types, function (type) {
-            return type === config.get('type') || 'resp';
-          });
-          console.log("wlal")
-          console.log(type);
+          this.setCurrent(user);
+
           this.model.set('users', users);
-          this.model.set('type', type);
           this.render();
         }, this);
         controls.fetch();
       },
       onRender: function () {
-        console.log("addpath:onrender");
+        console.log("addpath:onrender")
       },
       events: {
         'click  button[type="submit"]' : 'addPath',
+        'change select' : 'changeUser'
       },
       addPath: function (e) {
         console.log(e)
@@ -38,8 +35,23 @@ define([
         var user = _.find(this.model.get('users'), function (user) {
           return user._id === selectedUser;
         });
-        this.model.set('user', user);
-        this.render()
+        this.setCurrent(user);
+        this.render();
+      },
+      setCurrent: function (user) {
+        var type = 'resp';
+        var usertype = _.find(user.types, function (t) {
+          return t.type === type;
+        });
+
+        var current = {
+          user: user._id,
+          starttime: usertype.starttime,
+          endtime: usertype.endtime,
+          pages: usertype.pages
+        };
+
+        this.model.set('current', current);
       }
     });
   }
