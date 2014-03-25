@@ -34,6 +34,7 @@ exports.users = function (req, res) {
       users: resp,
       user: resp.length > 0 ? resp[2] : {}
     };
+    console.log(JSON.stringify(model))
     res.send(model);
   });
 };
