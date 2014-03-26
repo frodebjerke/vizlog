@@ -1,8 +1,18 @@
 
 .el-addpath {
+  color: #eeeeee;
+}
+.el-addpath .addpath-form {
   padding: 2em;
   background-color: #341f13;
-  color: #eeeeee;
+}
+.el-addpath .addpath-nav {
+  font-size: 200%;
+  text-transform: uppercase;
+  background-color: #15303e;
+  padding-left: 2em;
+  border-top: 2px solid #183849;
+  cursor: pointer;
 }
 
 .el-config {

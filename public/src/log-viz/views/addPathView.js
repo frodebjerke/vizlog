@@ -6,7 +6,7 @@ define([
   ], function (Marionette, Tmpl, Controls, Path) {
     return Marionette.ItemView.extend({
       template: Tmpl,
-      className: "row",
+      className: "addpath-form",
 
       initialize: function (options) {
         this.model = this.model || new Backbone.Model();
@@ -24,9 +24,8 @@ define([
         }, this);
         controls.fetch();
       },
-
-      onRender: function () {
-        console.log("addpath:onrender");
+      onShow: function () {
+        this.delegateEvents();
       },
 
       events: {
@@ -34,7 +33,6 @@ define([
         'change .addpath-user' : 'changeUser',
         'change .addpath-type' : 'changeType'
       },
-
       addPath: function (e) {
         var form = e.currentTarget.form;
         var start = $(form).find('.addpath-startpoint')[0].value;
@@ -49,6 +47,7 @@ define([
         });
         var paths = this.paths;
         paths.add(path);
+        this.trigger("addpath:submit");
       },
 
       changeUser: function (e) {

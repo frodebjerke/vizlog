@@ -5,9 +5,6 @@ define([
     var typeView = Marionette.ItemView.extend({
       template: Tmpl,
       tagName: 'li',
-      initialize: function (options) {
-        console.log(options)
-      },
       events: {
         'click .paths-remove' : 'removePath'
       },

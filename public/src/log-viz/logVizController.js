@@ -5,6 +5,7 @@ define([
     'log-viz/views/graphView',
     'log-viz/views/pathsView',
     'log-viz/views/addPathView',
+    'log-viz/views/navtoAddPathView',
     'log-viz/views/logVizLayout',
     'log-viz/views/configView',
 
@@ -13,7 +14,7 @@ define([
     'entities/controlsModel',
     'entities/pathCollection'
 ],
-function (Backbone, GraphView, PathsView, AddPathView, Layout, ConfigView, Config, Controls, Paths) {
+function (Backbone, GraphView, PathsView, AddPathView, NavToAddPathView, Layout, ConfigView, Config, Controls, Paths) {
   var LogVizController = Backbone.Marionette.Controller.extend({
     initialize: function (options) {
       this.region = options.region;
@@ -43,7 +44,20 @@ function (Backbone, GraphView, PathsView, AddPathView, Layout, ConfigView, Confi
       return view;
     },
     renderAddPath: function (region, paths, config, controls) {
+      var nav = new NavToAddPathView();
       var view = new AddPathView({paths: paths, config: config, controls: controls});
+      region.show(nav);
+      nav.on('addpath:do', function () {
+        console.log('addpath:do')
+        region.show(view);
+      });
+      view.on('addpath:submit', function () {
+        console.log('addpath:submit')
+        region.show(nav);
+      }.bind(this));
+    },
+    renderNavToAddPath: function (region) {
+      var view = new NavToAddPathView();
       region.show(view);
       return view;
     },
