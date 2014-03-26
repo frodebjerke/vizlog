@@ -16,7 +16,8 @@ exports.users = function (req, res) {
       "_id": {user: "$user", type: "$type"},
       "pages": {$sum: 1},
       "starttime": {$min: "$starttime"},
-      "endtime": {$max: "$endtime"}
+      "endtime": {$max: "$endtime"},
+      "unit": {$first: "$unit"}
     }
   }, {
     $group: {
@@ -25,7 +26,8 @@ exports.users = function (req, res) {
         "type": "$_id.type",
         "pages": "$pages",
         "starttime": "$starttime",
-        "endtime": "$endtime"
+        "endtime": "$endtime",
+        "unit": "$unit"
       }}
     }
   }).exec(function (err, resp) {
@@ -33,7 +35,7 @@ exports.users = function (req, res) {
     var model = {
       users: resp,
     };
-    console.log(JSON.stringify(model))
+    console.log(JSON.stringify(model));
     res.send(model);
   });
 };

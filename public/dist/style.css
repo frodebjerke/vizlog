@@ -73,6 +73,16 @@
   background: #15303e;
   color: #eeeeee;
 }
+.el-paths ul li span {
+  margin-left: 2em;
+}
+.el-paths ul li span:first-child {
+  margin-left: 0;
+}
+.el-paths ul li .paths-remove {
+  float: right;
+  color: #eeeeee;
+}
 .el-paths ul li:nth-child(1) {
   background: #f15854;
 }

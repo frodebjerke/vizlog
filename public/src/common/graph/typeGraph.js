@@ -96,6 +96,7 @@ function (graph, Paths, Path, Config, d3) {
     lg.paths.on('remove', function (path) {
       console.log("paths:remove");
       console.log(path);
+      lg.renderGraph();
     });
 
     return lg;

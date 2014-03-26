@@ -5,8 +5,15 @@ define([
     var typeView = Marionette.ItemView.extend({
       template: Tmpl,
       tagName: 'li',
-      events: {
+      initialize: function (options) {
+        console.log(options)
       },
+      events: {
+        'click .paths-remove' : 'removePath'
+      },
+      removePath: function (e) {
+        this.model.destroy();
+      }
     });
 
     return Marionette.CollectionView.extend({

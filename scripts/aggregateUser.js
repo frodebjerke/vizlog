@@ -4,7 +4,8 @@ db.logs.aggregate({
     "_id": {user: "$user", type: "$type"},
     "pages": {$sum: 1},
     "starttime": {$min: "$starttime"},
-    "endtime": {$max: "$endtime"}
+    "endtime": {$max: "$endtime"},
+    "unit": {$first: "$unit"}
   }
 }, {
   $group: {
@@ -13,7 +14,8 @@ db.logs.aggregate({
       "type": "$_id.type",
       "pages": "$pages",
       "starttime": "$starttime",
-      "endtime": "$endtime"
+      "endtime": "$endtime",
+      "unit": "$unit"
     }}
   }
 });

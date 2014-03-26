@@ -40,7 +40,13 @@ define([
         var start = $(form).find('.addpath-startpoint')[0].value;
         var current = this.model.get("current");
         var config = this.config;
-        var path = new Path({user: current.user, type: current.type, start: start, length: config.get('length')});
+        var path = new Path({
+          user: current.user,
+          type: current.type,
+          start: start,
+          length: config.get('length'),
+          unit: current.unit
+        });
         var paths = this.paths;
         paths.add(path);
       },
@@ -64,7 +70,8 @@ define([
           starttime: usertype.starttime,
           endtime: usertype.endtime,
           pages: usertype.pages,
-          type: usertype.type
+          type: usertype.type,
+          unit: usertype.unit
         };
         this.model.set('current', current);
       },
