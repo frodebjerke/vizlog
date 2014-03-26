@@ -6,7 +6,6 @@
 }
 
 .el-linegraph path {
-  stroke: #15303e;
   stroke-width: 1;
   fill: none;
 }
@@ -29,31 +28,31 @@
   stroke: #341f13;
   fill: #eeeeee;
 }
-.el-linegraph .stroke-color.0 {
+.el-linegraph .stroke-color.c0 {
   stroke: #F15854;
 }
-.el-linegraph .stroke-color.1 {
+.el-linegraph .stroke-color.c1 {
   stroke: #4D4D4D;
 }
-.el-linegraph .stroke-color.2 {
+.el-linegraph .stroke-color.c2 {
   stroke: #5DA5DA;
 }
-.el-linegraph .stroke-color.3 {
+.el-linegraph .stroke-color.c3 {
   stroke: #FAA43A;
 }
-.el-linegraph .stroke-color.4 {
+.el-linegraph .stroke-color.c4 {
   stroke: #60BD68;
 }
-.el-linegraph .stroke-color.5 {
+.el-linegraph .stroke-color.c5 {
   stroke: #F17CB0;
 }
-.el-linegraph .stroke-color.6 {
+.el-linegraph .stroke-color.c6 {
   stroke: #B2912F;
 }
-.el-linegraph .stroke-color.7 {
+.el-linegraph .stroke-color.c7 {
   stroke: #B276B2;
 }
-.el-linegraph .stroke-color.8 {
+.el-linegraph .stroke-color.c8 {
   stroke: #DECF3F;
 }
 

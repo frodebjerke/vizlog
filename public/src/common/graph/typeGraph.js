@@ -47,9 +47,10 @@ function (graph, Paths, Path, Config, d3) {
           .y(function (d) { return -1 * y(d); });
     };
 
-    var addPathToGraph = function (graph, data, line) {
+    var addPathToGraph = function (graph, data, line, i) {
       return graph.append("svg:path")
-          .attr("d", line(data));
+          .attr("d", line(data))
+          .attr("class", "stroke-color c"+i);
     };
 
     var removeLines = function () {
@@ -75,8 +76,8 @@ function (graph, Paths, Path, Config, d3) {
         lg.x = setX();
         lg.y = setY();
         lg.line = defaultLine(lg.x, lg.y);
-        lg.lines = lg.paths.map(function (path) {
-          return addPathToGraph(lg.graph, path.get("data"), lg.line);
+        lg.lines = lg.paths.map(function (path, idx) {
+          return addPathToGraph(lg.graph, path.get("data"), lg.line, idx);
         });
       }
     };
