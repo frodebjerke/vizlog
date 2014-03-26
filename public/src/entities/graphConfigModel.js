@@ -7,7 +7,7 @@ function (Backbone) {
       ymin: 0,
       ymax: 0,
       starttime: 0,
-      length: 60,
+      length: 20,
       el: "#graph",
       margin: 30
     }

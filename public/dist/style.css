@@ -29,31 +29,31 @@
   fill: #eeeeee;
 }
 .el-linegraph .stroke-color.c0 {
-  stroke: #F15854;
+  stroke: #f15854;
 }
 .el-linegraph .stroke-color.c1 {
-  stroke: #4D4D4D;
+  stroke: #4d4d4d;
 }
 .el-linegraph .stroke-color.c2 {
-  stroke: #5DA5DA;
+  stroke: #5da5da;
 }
 .el-linegraph .stroke-color.c3 {
-  stroke: #FAA43A;
+  stroke: #faa43a;
 }
 .el-linegraph .stroke-color.c4 {
-  stroke: #60BD68;
+  stroke: #60bd68;
 }
 .el-linegraph .stroke-color.c5 {
-  stroke: #F17CB0;
+  stroke: #f17cb0;
 }
 .el-linegraph .stroke-color.c6 {
-  stroke: #B2912F;
+  stroke: #b2912f;
 }
 .el-linegraph .stroke-color.c7 {
-  stroke: #B276B2;
+  stroke: #b276b2;
 }
 .el-linegraph .stroke-color.c8 {
-  stroke: #DECF3F;
+  stroke: #decf3f;
 }
 
 .el-paths {
@@ -70,6 +70,30 @@
   background: #15303e;
   color: #eeeeee;
 }
-.el-paths ul li:nth-child(odd) {
-  background: #183849;
+.el-paths ul li:nth-child(1) {
+  background: #f15854;
+}
+.el-paths ul li:nth-child(2) {
+  background: #4d4d4d;
+}
+.el-paths ul li:nth-child(3) {
+  background: #5da5da;
+}
+.el-paths ul li:nth-child(4) {
+  background: #faa43a;
+}
+.el-paths ul li:nth-child(5) {
+  background: #60bd68;
+}
+.el-paths ul li:nth-child(6) {
+  background: #f17cb0;
+}
+.el-paths ul li:nth-child(7) {
+  background: #b2912f;
+}
+.el-paths ul li:nth-child(8) {
+  background: #b276b2;
+}
+.el-paths ul li:nth-child(9) {
+  background: #decf3f;
 }
