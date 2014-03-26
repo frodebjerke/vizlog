@@ -24,6 +24,7 @@ define([
         }, this);
         controls.fetch();
       },
+      
       onShow: function () {
         this.delegateEvents();
       },
