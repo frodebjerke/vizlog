@@ -5,6 +5,18 @@
   color: #eeeeee;
 }
 
+.el-config {
+  padding: 2em;
+  background: #15303e;
+  color: #eeeeee;
+}
+.el-config .config-header {
+  text-transform: uppercase;
+}
+.el-config .config-value {
+  font-size: 200%;
+}
+
 .el-linegraph path {
   stroke-width: 1;
   fill: none;
@@ -60,7 +72,7 @@
 }
 
 .el-paths {
-  min-height: 4em;
+  min-height: 3em;
   background-color: #194054;
 }
 .el-paths ul {

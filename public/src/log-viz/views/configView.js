@@ -6,6 +6,7 @@ define([
       template: Tmpl,
       className: 'row',
       initialize: function (options) {
+        console.log(this.model)
       },
       events: {
       },
