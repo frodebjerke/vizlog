@@ -1,46 +1,44 @@
 <form class="form">
   <div class="row">
     <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
+
         <label class="">User:</label>
         <select class="form-control addpath-user">
           {{# each users}}
           <option value="{{_id}}" {{selected}}>{{_id}}</option>
           {{/each}}
         </select>
+
     </div>
     <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
-      <label class="">Meta:</label>
-      <p class="">
-        {{current.pages}} minutes
-      </p>
+
+      <label class="">Type:</label>
+      <select class="form-control addpath-type">
+        {{# each types}}
+        <option value="{{type}}" {{selected}}>{{type}}</option>
+        {{/each}}
+      </select>
+
     </div>
+
     <div class="clearfix visible-lg visible-xs"></div>
+
     <div class="col-xs-6 col-sm-4 col-lg-6  form-group">
+
       <label class="">Startpoint:</label>
       <input type="text" class="form-control addpath-startpoint" value="{{current.starttime}}"/>
+
     </div>
     <div class="col-xs-6 col-sm-4 col-lg-6 form-group">
+
       <label class="">Data range:</label>
       <p class="">
         {{current.starttime}} -> {{current.endtime}}
       </p>
+
     </div>
   </div>
   <div class="form-group">
     <button type="submit" onclick="return false" class="btn btn-primary">Add path</button>
   </div>
 </form>
-
-
-<!--   {{# with this}}
-<select>
-  {{# each users}}
-  <option value="{{_id}}">{{_id}}</option>
-  {{/each}}
-</select>
-<hr />
-{{type.pages}}
-{{type.starttime}}
-{{type.endtime}}
-{{/with}}
-  <a href="javascript:" class="addpath-submit">+</a> -->
