@@ -6,6 +6,7 @@ define([
   ],
 function (Backbone, _, async, LogPage) {
   var numPages = function (offset, length, count) {
+    offset = offset % length;
     var first = count - offset;
     return (offset > 0 ? 1 : 0)+Math.floor(first/length)+(first % length !== 0 ? 1 : 0);
   };
@@ -33,9 +34,9 @@ function (Backbone, _, async, LogPage) {
           offset = e.offset;
         var values = doc.getArray(offset, length);
         length = length - (values.length / doc.get("frequence"));
+
         return memo.concat(values);
       }, []);
-
       this.set('data', data);
     },
     // START IS TIMESTAMP, count is S
@@ -48,7 +49,7 @@ function (Backbone, _, async, LogPage) {
       var startpage = Math.floor(offset/docLength);
       var pages = numPages(offset, docLength, count);
       // fetch pages
-      var pageIndexes = _.range(startpage, pages);
+      var pageIndexes = _.range(startpage, startpage + pages);
       async.map(pageIndexes, function (page, callback) {
         var lp = this.addLogPage(page);
         lp.once('change', function (page) {
@@ -57,7 +58,7 @@ function (Backbone, _, async, LogPage) {
       }.bind(this), function (err, res) {
         if (err) throw new Error(err);
         // GOT THE NEEDED PAGES
-        this.trigger("neededdocs:fetched", {docs: res, offset: offset, length: count});
+        this.trigger("neededdocs:fetched", {docs: res, offset: offset % docLength, length: count});
       }.bind(this));
     },
     addLogPage: function (page) {

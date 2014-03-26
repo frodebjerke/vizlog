@@ -17,7 +17,6 @@ define([
         controls.once('change', function () {
           var users = controls.get('users');
           var user = _.first(users);
-          console.log(this);
           this.setCurrent(user);
           this.model.set('users', users);
           this.model.set('types', user.types);
@@ -55,8 +54,7 @@ define([
 
       changeType: function (e) {
         var type = this.currentFromSelect(e, this.model.get('types'), function (t, s) { return t.type === s; });
-        this.model.get('current')['type'] = type.type;
-        console.log(this.model.get('current'))
+        this.model.get('current').type = type.type;
       },
 
       setCurrent: function (user) {

@@ -17,7 +17,6 @@ function (Backbone, GraphView, PathsView, AddPathView, Layout, ConfigView, Confi
   var LogVizController = Backbone.Marionette.Controller.extend({
     initialize: function (options) {
       this.region = options.region;
-      this.model = this.model || new Backbone.Model();
 
       var config = new Config();
       var paths = new Paths();
