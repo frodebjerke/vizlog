@@ -34,6 +34,9 @@
 .el-linegraph path:hover {
   stroke-width: 2;
 }
+.el-linegraph path.focus {
+  stroke-width: 2;
+}
 .el-linegraph line {
   stroke: #341f13;
 }
