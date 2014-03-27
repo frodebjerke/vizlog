@@ -10,20 +10,27 @@
     padding: 0;
 
     li {
-      padding: 1em;
-      background: @pri1;
       color: @white;
 
-      span {
-        margin-left: 2em;
-        &:first-child {
-          margin-left: 0;
-        }
+      .paths-item {
+        padding: 1em;
+      }
+      .paths-item-adjust {
+        padding: 1em 2em;
+        background-color: @com1;
       }
 
       .paths-remove {
         float: right;
         color: @white;
+      }
+
+      .paths-header {
+        text-transform: uppercase;
+      }
+
+      .paths-value {
+        font-size: 200%;
       }
 
       &:nth-child(1) {

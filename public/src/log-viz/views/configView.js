@@ -4,7 +4,7 @@ define([
   ], function (Marionette, Tmpl) {
     return Marionette.ItemView.extend({
       template: Tmpl,
-      className: 'row',
+      className: 'col-xs-12',
       initialize: function (options) {
         console.log(this.model)
       },

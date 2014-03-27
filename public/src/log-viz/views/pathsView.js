@@ -5,6 +5,7 @@ define([
     var typeView = Marionette.ItemView.extend({
       template: Tmpl,
       tagName: 'li',
+      className: "col-xs-12",
       initialize: function (options) {
         console.log(options.index);
         this.index = options.index;

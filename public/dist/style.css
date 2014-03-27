@@ -10,20 +10,24 @@
   font-size: 200%;
   text-transform: uppercase;
   background-color: #15303e;
-  padding-left: 2em;
+  padding-left: 1em;
   border-top: 2px solid #183849;
   cursor: pointer;
 }
 
 .el-config {
-  padding: 2em;
-  background: #15303e;
+  margin: 0;
+  padding: 0;
   color: #eeeeee;
 }
-.el-config .config-header {
+.el-config .config-content {
+  padding: 1em;
+  background: #15303e;
+}
+.el-config .config-content .config-header {
   text-transform: uppercase;
 }
-.el-config .config-value {
+.el-config .config-content .config-value {
   font-size: 200%;
 }
 
@@ -94,19 +98,24 @@
   padding: 0;
 }
 .el-paths ul li {
-  padding: 1em;
-  background: #15303e;
   color: #eeeeee;
 }
-.el-paths ul li span {
-  margin-left: 2em;
+.el-paths ul li .paths-item {
+  padding: 1em;
 }
-.el-paths ul li span:first-child {
-  margin-left: 0;
+.el-paths ul li .paths-item-adjust {
+  padding: 1em 2em;
+  background-color: #341f13;
 }
 .el-paths ul li .paths-remove {
   float: right;
   color: #eeeeee;
+}
+.el-paths ul li .paths-header {
+  text-transform: uppercase;
+}
+.el-paths ul li .paths-value {
+  font-size: 200%;
 }
 .el-paths ul li:nth-child(1) {
   background: #f15854;

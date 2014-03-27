@@ -1,12 +1,26 @@
-<div class="paths-item">
-  <span title="User">{{user}}</span>
-  <span title="Type">{{type}}</span>
-  <span title="Startpoint">{{start}}</span>
-  <span title="Unit">{{unit}}</span>
-  <a href="javascript:" class="paths-remove"><span class="glyphicon glyphicon-remove-sign"></span></a>
+<div class="row paths-item">
+  <div class="col-xs-3" title="User">
+    {{user}}
+  </div>
+  <div class="col-xs-2" title="Type">
+    {{type}}
+  </div>
+  <div class="col-xs-3"title="Startpoint">
+    {{start}}
+  </div>
+  <div class="col-xs-2" title="Unit">
+    {{unit}}
+  </div>
+  <a href="javascript:" class="col-xs-2 paths-remove"><span class="glyphicon glyphicon-remove-sign"></span></a>
 </div>
-{{# hasFocus}}
-<div class="paths-item-adjust">
-  <h1>HELLO THERE</h1>
+<div class="row paths-item-adjust">
+  <div class="col-xs-4">
+    <div class="paths-header">
+      Adjust
+    </div>
+    <div class="">
+      <span class="glyphicon glyphicon-backward"></span> <span class="paths-value">{{start}}</span> <span class="glyphicon glyphicon-forward"></span>
+    </div>
+  </div>
+  <div class="clearfix"></div>
 </div>
-{{/hasFocus}}
