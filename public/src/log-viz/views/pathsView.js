@@ -7,7 +7,6 @@ define([
       tagName: 'li',
       className: "col-xs-12",
       initialize: function (options) {
-        console.log(options.index);
         this.index = options.index;
       },
       onRender: function () {
@@ -16,7 +15,9 @@ define([
       events: {
         'click .paths-remove' : 'removePath',
         'focus' : 'hasFocus',
-        'blur' : 'lostFocus'
+        'blur' : 'lostFocus',
+        'click .adjust-left' : 'adjustLeft',
+        'click .adjust-right' : 'adjustRight'
       },
       removePath: function (e) {
         this.model.destroy();
@@ -27,6 +28,17 @@ define([
       },
       lostFocus: function () {
         this.model.set("hasFocus", false);
+        this.render();
+      },
+      adjustLeft: function () {
+        this.adjust(-10);
+      },
+      adjustRight: function () {
+        this.adjust(10);
+      },
+      adjust: function (incr) {
+        var start = this.model.get("start");
+        this.model.set("start", parseInt(start) + incr);
         this.render();
       }
     });

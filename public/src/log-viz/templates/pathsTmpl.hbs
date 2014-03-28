@@ -13,14 +13,16 @@
   </div>
   <a href="javascript:" class="col-xs-2 paths-remove"><span class="glyphicon glyphicon-remove-sign"></span></a>
 </div>
+{{# hasFocus}}
 <div class="row paths-item-adjust">
   <div class="col-xs-4">
     <div class="paths-header">
       Adjust
     </div>
     <div class="">
-      <span class="glyphicon glyphicon-backward"></span> <span class="paths-value">{{start}}</span> <span class="glyphicon glyphicon-forward"></span>
+      <span class="glyphicon glyphicon-backward adjust-left"></span> <span class="paths-value">{{start}}</span> <span class="glyphicon glyphicon-forward adjust-right"></span>
     </div>
   </div>
   <div class="clearfix"></div>
 </div>
+{{/hasFocus}}
