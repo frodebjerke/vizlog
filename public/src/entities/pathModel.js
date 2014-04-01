@@ -16,7 +16,7 @@ function (Backbone, _, async, LogPage) {
       if (this.has("start") && this.has("length")) {
         this.get("logpages").once("add", this.reloadPath.bind(this));
       }
-      this.on("change:start", this.reloadPath.bind(this));
+      this.on("change", this.reloadPath.bind(this));
       this.addLogPage(0);
     },
     reloadPath: function () {
@@ -38,7 +38,7 @@ function (Backbone, _, async, LogPage) {
     },
     // START IS TIMESTAMP, count is S
     getNeededDocs: function (start, count) {
-      console.log("Start: %s, Count: %d", start, count);
+      console.log("Start: %s  , Count: %d", start, count);
       var first = this.get('logpages').findWhere({'page': 0});
       var pathstart = first.get("starttime");
       var docEnd = first.get("endtime");
