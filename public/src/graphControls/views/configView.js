@@ -6,11 +6,22 @@ define([
       template: Tmpl,
       className: 'col-xs-12',
       initialize: function (options) {
-        console.log(this.model)
       },
       events: {
+        'click .zoom-minus' : 'zoomMinus',
+        'click .zoom-plus' : 'zoomPlus'
       },
-
+      zoomMinus: function () {
+        this.zoom(10);
+      },
+      zoomPlus: function () {
+        this.zoom(-10);
+      },
+      zoom: function (d) {
+        var length = this.model.get("length");
+        this.model.set("length", length + d);
+        this.render();
+      }
     });
   }
 );
