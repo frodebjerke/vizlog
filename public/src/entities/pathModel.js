@@ -14,12 +14,14 @@ function (Backbone, _, async, LogPage) {
   return Backbone.Model.extend({
     initialize: function () {
       if (this.has("start") && this.has("length")) {
-        this.get("logpages").once("add", function () {
-          this.getNeededDocs(this.get("start"), this.get("length"));
-          this.once('neededdocs:fetched', this.getValuesFromDocs);
-        }.bind(this));
+        this.get("logpages").once("add", this.reloadPath.bind(this));
       }
+      this.on("change:start", this.reloadPath.bind(this));
       this.addLogPage(0);
+    },
+    reloadPath: function () {
+      this.getNeededDocs(this.get("start"), this.get("length"));
+      this.once('neededdocs:fetched', this.getValuesFromDocs);
     },
     getValuesFromDocs: function (e) {
       var length = e.length;
