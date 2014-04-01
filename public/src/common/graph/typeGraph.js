@@ -85,23 +85,6 @@ function (graph, Paths, Path, Config, d3) {
       }
     };
 
-    // Events
-    lg.paths.on('add', function (path) {
-      console.log("paths:add");
-      //renderGraph();
-    });
-
-    lg.paths.on('change', function (path) {
-      console.log("paths:change");
-      lg.renderGraph();
-    });
-
-    lg.paths.on('remove', function (path) {
-      console.log("paths:remove");
-      console.log(path);
-      lg.renderGraph();
-    });
-
     return lg;
   };
 });

@@ -5,7 +5,7 @@ function (d3) {
   return function (config) {
     var el = config.get('el'),
         margin = config.get('margin');
-    console.log($(el));
+        
     var getWidth = function () {
       return $(el).width();
     };
