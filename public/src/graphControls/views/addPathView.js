@@ -1,9 +1,8 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/addPathTmpl',
-  'entities/controlsModel',
-  'entities/pathModel'
-  ], function (Marionette, Tmpl, Controls, Path) {
+  'hbs!graphControls/templates/addPathTmpl',
+  ],
+  function (Marionette, Tmpl) {
     return Marionette.ItemView.extend({
       template: Tmpl,
       className: "addpath-form",
@@ -24,7 +23,7 @@ define([
         }, this);
         controls.fetch();
       },
-      
+
       onShow: function () {
         this.delegateEvents();
       },
@@ -39,16 +38,15 @@ define([
         var start = $(form).find('.addpath-startpoint')[0].value;
         var current = this.model.get("current");
         var config = this.config;
-        var path = new Path({
+        var pathConf = {
           user: current.user,
           type: current.type,
           start: start,
           length: config.get('length'),
           unit: current.unit
-        });
-        var paths = this.paths;
-        paths.add(path);
-        this.trigger("addpath:submit");
+        };
+
+        this.trigger("addpath:submit", pathConf);
       },
 
       changeUser: function (e) {

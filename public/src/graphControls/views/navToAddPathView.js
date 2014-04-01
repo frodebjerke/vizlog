@@ -1,6 +1,6 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/navToAddPathTmpl'
+  'hbs!graphControls/templates/navToAddPathTmpl'
   ],
 function (Marionette, Tmpl) {
 

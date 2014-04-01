@@ -1,19 +1,16 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/logVizTmpl'
+  'hbs!graphControls/templates/gcLayoutTmpl'
   ],
   function (Marionette, Tmpl) {
     var Layout = Marionette.Layout.extend({
       template: Tmpl,
-      className: "row",
+      className: "col-lg-3",
       regions: {
         config: '#config-region',
         paths: "#paths-region",
-        addpath: "#addpath-region",
-        graph: '#graph-region'
+        addpath: "#addpath-region"
       },
-      initialize: function (options) {
-      }
     });
     return Layout;
   });

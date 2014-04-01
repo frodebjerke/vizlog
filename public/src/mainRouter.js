@@ -4,8 +4,7 @@ define([
 function (Marionette) {
   var MainRouter = Marionette.AppRouter.extend({
     appRoutes: {
-      'doc': 'logVizModule',
-      '*action': 'logVizModule'
+      '*action': 'common'
     }
   });
   return MainRouter;

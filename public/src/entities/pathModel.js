@@ -13,11 +13,6 @@ function (Backbone, _, async, LogPage) {
 
   return Backbone.Model.extend({
     initialize: function () {
-      if (!this.has('logpages')) {
-        var logpages = new Backbone.Collection();
-        this.set("logpages", logpages);
-      }
-
       if (this.has("start") && this.has("length")) {
         this.get("logpages").once("add", function () {
           this.getNeededDocs(this.get("start"), this.get("length"));

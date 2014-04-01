@@ -1,6 +1,6 @@
 define([
   'backbone.marionette',
-  'hbs!log-viz/templates/pathsTmpl'
+  'hbs!graphControls/templates/pathsTmpl'
   ], function (Marionette, Tmpl) {
     var typeView = Marionette.ItemView.extend({
       template: Tmpl,

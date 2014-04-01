@@ -5,7 +5,7 @@ function (d3) {
   return function (config) {
     var el = config.get('el'),
         margin = config.get('margin');
-
+    console.log($(el));
     var getWidth = function () {
       return $(el).width();
     };
@@ -22,7 +22,7 @@ function (d3) {
           .append("svg:svg")
           .attr("width", width)
           .attr("height", height)
-          .attr("class", "el-graph");
+          .attr("class", "el-linegraph");
     }();
 
     var graph = function (svg, starty, stopy) {

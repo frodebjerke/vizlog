@@ -2,14 +2,16 @@ define([
   'backbone.marionette',
   'communicator',
   'routesController',
-  'mainRouter'
+  'mainRouter',
+  'handlerManager'
 ],
-function (Marionette, Communicator, RoutesController, MainRouter) {
+function (Marionette, Communicator, RoutesController, MainRouter, handlers) {
   window.Vizlog = new Marionette.Application();
 
   Vizlog.on('initialize:before', function (options) {
     this.addRegions({
-      "main": "#main-region"
+      "graph": "#graph-region",
+      "graphControls": "#graph-controls-region"
     });
   });
 
@@ -17,6 +19,8 @@ function (Marionette, Communicator, RoutesController, MainRouter) {
 		this.router = new MainRouter({controller:options.controller});
 		Backbone.history.start();
 	});
+
+  Vizlog.reqres.setHandlers(handlers);
 
   Vizlog.mainController = new RoutesController();
 	Vizlog.start({controller : Vizlog.mainController} );

@@ -2,12 +2,20 @@ define([
     'backbone',
 
     // Modules
-    'log-viz/logViz'
+    'graph/graph',
+    'graphControls/graphControls'
 ],
-function (Backbone, LogViz) {
+function (Backbone, Graph, GraphControls) {
   var MainController = Backbone.Marionette.Controller.extend({
-    logVizModule: function () {
-      Vizlog.module('per-doc-viz', LogViz);
+    common: function () {
+      this.graphModule();
+      this.graphControlsModule();
+    },
+    graphModule: function () {
+      Vizlog.module('graphmodule', Graph);
+    },
+    graphControlsModule: function () {
+      Vizlog.module('graph-controls', GraphControls);
     }
   });
   return MainController;
