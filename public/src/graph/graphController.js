@@ -1,9 +1,10 @@
 define([
 
   'common/graph/typeGraph',
-  'graph/views/graphView'
+  'graph/views/graphView',
+  'entities/graphModel'
   ],
-function (typeGraph, GraphView) {
+function (typeGraph, GraphView, GraphModel) {
   var graphCtrl = Backbone.Marionette.Controller.extend({
     initialize: function (options) {
       var region = options.region;
@@ -12,34 +13,33 @@ function (typeGraph, GraphView) {
       this.paths = reqres.request('paths');
       this.config = reqres.request('config');
 
-      var graphview = this.renderGraph(region);
+      this.graphview = this.createGraph();
+      this.renderGraph(region, this.graphview);
+      this.graphEvents();
 
     },
-    renderGraph: function (region) {
-      var view = new GraphView();
-      view.once("graphview:rendered", function () {
-        this.graph = this.createGraph(this.paths, this.config);
+    renderGraph: function (region, view) {
 
-        view.on('graphview:resize', this.graph.renderGraph);
-        this.graphEvents();
-      }.bind(this));
+      // view.once("graphview:rendered", function () {
+      //   this.graph = this.createGraph(this.paths, this.config);
+      //
+      //   view.on('graphview:resize', this.graph.renderGraph);
+      //   this.graphEvents();
+      // }.bind(this));
       region.show(view);
-      return view;
     },
-    createGraph: function (paths, config) {
-      return typeGraph({
-        paths: paths,
-        config: config
-      });
+    createGraph: function () {
+      var model = new GraphModel({paths: this.paths, config: this.config});
+      return new GraphView({model: model});
     },
     graphEvents: function () {
-      var graph = this.graph;
       var paths = this.paths;
       var config = this.config;
+      var graphview = this.graphview;
 
-      graph.paths.on('change', graph.renderGraph);
+      paths.on('change', graphview.render);
 
-      graph.paths.on('remove', graph.renderGraph);
+      paths.on('remove', graphview.render);
 
       config.on("change:length", function () {
         var length = config.get("length");
