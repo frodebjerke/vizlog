@@ -98,6 +98,37 @@ function (graph, Paths, Path, Config, d3) {
       return ylines;
     };
 
+    var showValuesOnHover = function () {
+      var focus = lg.svg.append("g")
+          .attr("class", "focus")
+          .style("display", "none");
+
+      var line = focus.append("line")
+          .attr("y1", 0)
+          .attr("y2", lg.height);
+
+      var mousemove = function () {
+        var x0 = lg.x.invert(d3.mouse(this)[0]);
+        x0 = x0 - (x0 % 1);
+
+        line.attr("x1", lg.x(x0)).attr("x2", lg.x(x0));
+
+        lg.paths.map(function (path) {
+          var y = path.get('data')[x0];
+
+          //focus.select("text").text("X: "+x0+ "\tY: "+y);
+        });
+      };
+
+      lg.svg.append("rect")
+          .attr("class", "overlay")
+          .attr("width", lg.width)
+          .attr("height", lg.height)
+          .on("mouseover", function() { focus.style("display", null); })
+          .on("mouseout", function() { focus.style("display", "none"); })
+          .on("mousemove", mousemove);
+    };
+
     // Orchestrate population
     lg.renderGraph = function () {
       removeThings(lg.lines);
@@ -114,6 +145,7 @@ function (graph, Paths, Path, Config, d3) {
           return addPathToGraph(lg.graph, path, lg.line, idx);
         });
         lg.ylines = addXLines(xDomain, yDomain);
+        showValuesOnHover();
       }
     };
 
