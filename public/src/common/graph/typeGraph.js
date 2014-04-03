@@ -107,16 +107,30 @@ function (graph, Paths, Path, Config, d3) {
           .attr("y1", 0)
           .attr("y2", lg.height);
 
+      var circle = lg.svg.append("g")
+          .attr("class", "focus")
+          .style("display", "none");
+
+      circle.append("circle")
+          .attr("r", 4.5);
+
+      circle.append("text")
+          .attr("x", 9)
+          .attr("dy", ".35em");
+
       var mousemove = function () {
         var x0 = lg.x.invert(d3.mouse(this)[0]);
         x0 = x0 - (x0 % 1);
 
         line.attr("x1", lg.x(x0)).attr("x2", lg.x(x0));
-
+        circle.style("display", "none");
         lg.paths.map(function (path) {
-          var y = path.get('data')[x0];
-
-          //focus.select("text").text("X: "+x0+ "\tY: "+y);
+          if (path.get('hasFocus')) {
+            var y = path.get('data')[x0];
+            circle.attr("transform", "translate("+lg.x(x0)+","+ (lg.height - lg.y(y))+")");
+            circle.select("text").text("X: "+x0+ "\tY: "+y);
+            circle.style("display", null);
+          }
         });
       };
 
