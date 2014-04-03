@@ -60,6 +60,11 @@
   stroke: #341f13;
   fill: #eeeeee;
 }
+.el-linegraph .xlabel {
+  stroke: #341f13;
+  height: 1em;
+  width: 30px;
+}
 .el-linegraph .stroke-color.c0 {
   stroke: #f15854;
 }

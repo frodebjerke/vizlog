@@ -29,16 +29,16 @@ function (graph, Paths, Path, Config, d3) {
       }, ydomain);
     };
 
-    var setX = function () {
+    var setX = function (xDomain) {
       var margin = lg.margin;
       var width = lg.width;
-      return d3.scale.linear().domain(getXDomain()).range([0 + margin, width - margin]);
+      return d3.scale.linear().domain(xDomain).range([0 + margin, width - margin]);
     };
 
-    var setY = function () {
+    var setY = function (yDomain) {
       var margin = lg.margin;
       var height = lg.height;
-      return d3.scale.linear().domain(getYDomain()).range([0 + margin, height - margin]);
+      return d3.scale.linear().domain(yDomain).range([0 + margin, height - margin]);
     };
 
     var defaultLine = function (x, y) {
@@ -56,9 +56,9 @@ function (graph, Paths, Path, Config, d3) {
           .attr("class", "stroke-color c"+i+ " "+focus);
     };
 
-    var removeLines = function () {
-      _.each(lg.lines, function (line) {
-        line.remove();
+    var removeThings = function (things) {
+      _.each(things, function (thing) {
+        thing.remove();
       });
     };
 
@@ -71,17 +71,49 @@ function (graph, Paths, Path, Config, d3) {
       lg.height = height;
     };
 
+    var addXLines = function (xDomain, yDomain) {
+      var numlines = 4;
+
+      var yMin = yDomain[0];
+      var yMax = yDomain[1];
+      var gap = (yMax-yMin)/numlines;
+      var arr = _.range(yMin,yMax, gap);
+      arr.push(yMax);
+
+      var ylines = [];
+      _.forEach(arr, function (y, num) {
+        ylines.push(lg.graph.append("svg:line")
+          .attr("x1", lg.x(xDomain[0]))
+          .attr("x2", lg.x(xDomain[1]))
+          .attr("y1", -lg.y(y))
+          .attr("y2", -lg.y(y)));
+
+        ylines.push(lg.graph.append("svg:text")
+          .attr("x", 0)
+          .attr("y", -lg.y(y))
+          .text(y.toFixed(3))
+          .attr("text-anchor", "right")
+          .attr("class", "xlabel"));
+      });
+      return ylines;
+    };
+
     // Orchestrate population
     lg.renderGraph = function () {
-      removeLines();
+      removeThings(lg.lines);
+      removeThings(lg.ylines);
       resetSize();
+
       if (lg.paths.length) {
-        lg.x = setX();
-        lg.y = setY();
+        var xDomain = getXDomain();
+        var yDomain = getYDomain();
+        lg.x = setX(xDomain);
+        lg.y = setY(yDomain);
         lg.line = defaultLine(lg.x, lg.y);
         lg.lines = lg.paths.map(function (path, idx) {
           return addPathToGraph(lg.graph, path, lg.line, idx);
         });
+        lg.ylines = addXLines(xDomain, yDomain);
       }
     };
 
