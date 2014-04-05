@@ -1,10 +1,11 @@
 define([
   'backbone.marionette',
   'hbs!graph/templates/graphTmpl',
-  'common/graph/linechart',
+  'common/linechart/linechart',
+  'common/linechart/hover',
   'd3'
   ],
-function (Marionette, Tmpl, linechart, d3) {
+function (Marionette, Tmpl, linechart, hover, d3) {
   var monitorWindowSize = function (trigger) {
     $(window).on("resize", function () {
       trigger('graphview:resize');
@@ -20,14 +21,15 @@ function (Marionette, Tmpl, linechart, d3) {
           yDomain = model.getYDomain(),
           margin = model.getMargin();
 
-      var svg = linechart.addSvg(el);
-      var chart = linechart.addChart(svg, el);
-      var x = linechart.setX(xDomain, margin, el);
-      var y = linechart.setY(yDomain, margin, el);
-      var line = linechart.defaultLine(x, y);
-      var lines = linechart.addPathsToChart(chart, data, line);
-      var ylines = linechart.addYLinesAndLabels(chart, xDomain, yDomain, x, y);
-      linechart.showValuesOnHover(el, svg, x);
+      var lc = linechart({
+        el: el,
+        margin: margin,
+        xDomain: xDomain,
+        yDomain: yDomain,
+        data: data
+      });
+      hover(lc);
+
     }
     else {
       console.log("no data, chart not rendered.");
