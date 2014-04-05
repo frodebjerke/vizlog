@@ -80,13 +80,16 @@ function (d3) {
       return ylines;
     },
     showValuesOnHover: function (el, chart, x) {
+      var width = getWidth(el),
+          height = getHeight(el);
+
       var focus = chart.append("g")
           .attr("class", "focus")
           .style("display", "none");
 
       var line = focus.append("line")
           .attr("y1", 0)
-          .attr("y2", getHeight(el));
+          .attr("y2", height);
 
       var circle = chart.append("g")
           .attr("class", "focus")
@@ -114,6 +117,14 @@ function (d3) {
         //   }
         // });
       };
+
+      chart.append("rect")
+          .attr("class", "overlay")
+          .attr("width", width)
+          .attr("height", height)
+          .on("mouseover", function() { focus.style("display", null); })
+          .on("mouseout", function() { focus.style("display", "none"); })
+          .on("mousemove", mousemove);
     }
   };
 });

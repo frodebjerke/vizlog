@@ -27,6 +27,7 @@ function (Marionette, Tmpl, linechart, d3) {
       var line = linechart.defaultLine(x, y);
       var lines = linechart.addPathsToChart(chart, data, line);
       var ylines = linechart.addYLinesAndLabels(chart, xDomain, yDomain, x, y);
+      linechart.showValuesOnHover(el, svg, x);
     }
     else {
       console.log("no data, chart not rendered.");
