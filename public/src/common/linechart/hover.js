@@ -38,7 +38,7 @@ function (d3) {
       // });
     };
 
-    lc.svg.append("rect")
+    return lc.svg.append("rect")
         .attr("class", "overlay")
         .attr("width", lc.width)
         .attr("height", lc.height)

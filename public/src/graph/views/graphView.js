@@ -28,8 +28,7 @@ function (Marionette, Tmpl, linechart, hover, d3) {
         yDomain: yDomain,
         data: data
       });
-      hover(lc);
-
+      var hoveroverlay = hover(lc);
     }
     else {
       console.log("no data, chart not rendered.");
